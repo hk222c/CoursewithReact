@@ -1,19 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
 
-export class DishdetailComponent extends Component {
-
-    // eslint-disable-next-line no-useless-constructor
-    constructor(props) {
-        super(props);        
-        
-    }
-
-   
-
-    renderDish(dish) {
-        console.log(dish);
+    function RenderDish({dish}) {        
         if (dish != null) {            
             const dishComments = dish.comments.map((aComment) => {
                 return (
@@ -50,20 +39,17 @@ export class DishdetailComponent extends Component {
                 <div></div>
             );
         }
-    }
+        
 
-    
-  
+    } 
 
-    render() {
+    const DishdetailComponent = (props) => {
         return (
-        <div className="container">
-            {this.renderDish(this.props.dish)}            
-        </div>
-        )
+            <div className="container">
+                <RenderDish dish={props.dish} />          
+            </div>
+        );
     }
-}
-
 
 
 export default DishdetailComponent;
