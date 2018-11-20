@@ -61,7 +61,7 @@ function About(props) {
                 </div>
             </div>
             <div className="row row-content">
-                <div className="col-12">
+                <div className="col-12 mb-3">
                     <h2>Corporate Leadership</h2>
                 </div>
                 <div className="col-12">
@@ -76,8 +76,8 @@ function About(props) {
 
 function RenderLeader({leader}) {   
     return(
-        <Media tag="li" key={leader.id} className= "mb-4">
-            <Media left className="mr-5">
+        <Media tag="li" key={leader.id} className= "mb-4 row">
+            <Media left className="col-12 col-md-2">
                 <Media object src={leader.image} alt={leader.name} />
             </Media>
             <Media body>
