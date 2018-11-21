@@ -80,7 +80,7 @@ function RenderLeader({leader}) {
             <Media left className="col-12 col-md-2">
                 <Media object src={leader.image} alt={leader.name} />
             </Media>
-            <Media body>
+            <Media body className="col-12 col-md-9">
                 <Media heading >
                     {leader.name}
                 </Media>
