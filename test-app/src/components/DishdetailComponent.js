@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { CommentForm } from './CommentForm';
+import CommentForm  from './CommentForm';
 
 
     function RenderDish({dish}, {comments}) {        
@@ -42,10 +42,10 @@ import { CommentForm } from './CommentForm';
                         <Card>
                             <CardBody>
                                 <CardTitle>Comments</CardTitle>
-                                {dishComments}                        
-                            </CardBody>                    
-                        </Card>
-                        <CommentForm />
+                                {dishComments}
+                                <CommentForm />                          
+                            </CardBody>                                             
+                        </Card>                        
                 </div>
             );
         }else {
