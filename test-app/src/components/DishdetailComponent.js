@@ -28,7 +28,7 @@ import { baseUrl } from '../shared/baseUrl';
 
     } 
 
-    function RenderComments({comments, addComment, dishId}) {
+    function RenderComments({comments, postComment, dishId}) {
         if (comments != null) {            
             const dishComments = comments.map((aComment) => {
                 return (
@@ -45,7 +45,7 @@ import { baseUrl } from '../shared/baseUrl';
                             <CardBody>
                                 <CardTitle>Comments</CardTitle>
                                 {dishComments}
-                                <CommentForm dishId={dishId} addComment={addComment} />                          
+                                <CommentForm dishId={dishId} postComment={postComment} />                          
                             </CardBody>                                             
                         </Card>                        
                 </div>
@@ -71,7 +71,7 @@ import { baseUrl } from '../shared/baseUrl';
             return(
                 <div className="container">
                     <div className="row">
-                        <h4>{props.errMess}</h4>
+                        <h4>{props.errMess}</h4>                      
                     </div>
                 </div>
             )
@@ -91,7 +91,7 @@ import { baseUrl } from '../shared/baseUrl';
                         <div className="row">
                             <RenderDish dish={props.dish} />
                             <RenderComments comments={props.comments} 
-                                addComment={props.addComment}
+                                postComment={props.postComment}
                                 dishId={props.dish.id} />
                         </div>
                                 
