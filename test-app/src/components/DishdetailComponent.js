@@ -4,20 +4,26 @@ import { Link } from 'react-router-dom';
 import CommentForm  from './CommentForm';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 
     function RenderDish({dish}) {        
         if (dish != null) {           
             return(                
                 <div className="col-12 col-md-5 m-1">
+                <FadeTransform in
+                    transformProps={{
+                        exitTransform: 'scale(0.5) translateY(-50%)'
+                    }}>
                     <Card>
                         <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
                         <CardBody>
                             <CardTitle>{dish.name}</CardTitle>
                             <CardText>{dish.description}</CardText>
                          </CardBody>
-                    </Card>                    
-                 </div>                             
+                    </Card>   
+                </FadeTransform>                 
+                </div>                             
             );
         } else {
             return(
@@ -32,11 +38,16 @@ import { baseUrl } from '../shared/baseUrl';
         if (comments != null) {            
             const dishComments = comments.map((aComment) => {
                 return (
-                    <div key={aComment.id}>
-                        <CardText>{aComment.comment}</CardText>
-                        <CardText>-- {aComment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day:'2-digit' }).format(new Date(Date.parse(aComment.date)))}</CardText>
-                        <br/>
-                    </div>
+                    <Stagger in>
+                        <Fade in>
+                            <div key={aComment.id}>
+                                <CardText>{aComment.comment}</CardText>
+                                <CardText>-- {aComment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day:'2-digit' }).format(new Date(Date.parse(aComment.date)))}</CardText>
+                                <br/>
+                            </div>                        
+                        </Fade>                                      
+                    </Stagger>
+                    
                 )
             });
             return(
