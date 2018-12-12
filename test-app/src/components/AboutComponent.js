@@ -1,14 +1,14 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent'
+import { Fade, Stagger } from 'react-animation-components';
+
 
 function About(props) {
-
-    const leaders = props.leaders.map((leader) => {
-        return (
-            <RenderLeader key={leader.id} leader={leader} />
-        );
-    });
+    
+    const leaders = RenderLeader(props);
 
     return(
         <div className="container">
@@ -28,7 +28,7 @@ function About(props) {
                     <p>Started in 2010, Ristorante con Fusion quickly established itself as a culinary icon par excellence in Hong Kong. With its unique brand of world fusion cuisine that can be found nowhere else, it enjoys patronage from the A-list clientele in Hong Kong.  Featuring four of the best three-star Michelin chefs in the world, you never know what will arrive on your plate the next time you visit us.</p>
                     <p>The restaurant traces its humble beginnings to <em>The Frying Pan</em>, a successful chain started by our CEO, Mr. Peter Pan, that featured for the first time the world's best cuisines in a pan.</p>
                 </div>
-                <div className="col-12 col-md-5">
+                <div className="col-12 col-md-6">
                     <Card>
                         <CardHeader className="bg-primary text-white">Facts At a Glance</CardHeader>
                         <CardBody>
@@ -74,21 +74,47 @@ function About(props) {
     );
 }
 
-function RenderLeader({leader}) {   
-    return(
-        <Media tag="li" key={leader.id} className= "mb-4 row">
-            <Media left className="col-12 col-md-2">
-                <Media object src={leader.image} alt={leader.name} />
-            </Media>
-            <Media body className="col-12 col-md-9">
-                <Media heading >
-                    {leader.name}
-                </Media>
-                <Media title="true" className="mb-2">{leader.designation}</Media>
-                {leader.description}
-            </Media>        
-        </Media>
-        );    
+function RenderLeader(props) {  
+    if(props.leadersLoading) {
+        return ( <Loading /> );
+     }
+     else if(props.leadersErrMess) {
+         return (
+             <div className="container">
+                 <div className="row">
+                     <h4>{props.leadersErrMess}</h4>                      
+                 </div>
+             </div>
+         );
+     } 
+     else {
+        const leaders = props.leaders.map((leader) => {        
+            return (
+
+                <Stagger in>
+                    <Fade in>
+                        <Media tag="li" key={leader.id} className= "mb-4 row">
+                        <Media left className="col-12 col-md-2">
+                            <Media object src={baseUrl + leader.image} alt={leader.name} />
+                        </Media>
+                        <Media body className="col-12 col-md-9">
+                            <Media heading >
+                                {leader.name}
+                            </Media>
+                            <Media title="true" className="mb-2">{leader.designation}</Media>
+                            {leader.description}
+                        </Media>        
+                        </Media>
+                    </Fade>
+                </Stagger>                
+            
+            );
+        });
+
+        return leaders;
+
+    }
+    
 }
 
 export default About;    
