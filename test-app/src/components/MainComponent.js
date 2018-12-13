@@ -33,13 +33,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchLeaders: () => {dispatch(fetchLeaders())} 
 })
 
-class Main extends Component {
-
-  // eslint-disable-next-line no-useless-constructor
-  constructor(props) {
-    super(props);
-
-  }
+class Main extends Component {  
   
   componentDidMount() {
     this.props.fetchDishes();
